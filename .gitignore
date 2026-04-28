@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Build output
+*.pdf
+*.html
+*.pptx
+
+# Editor
+.vscode/
+.idea/
+
+# Node (if using marp-cli locally)
+node_modules/
