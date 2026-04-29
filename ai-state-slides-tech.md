@@ -3,250 +3,430 @@ marp: true
 theme: default
 paginate: true
 style: |
-  section {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 1.2rem;
-    background: #0d1117;
-    color: #c9d1d9;
-    padding: 50px 70px;
+  :root {
+    --bg: #060b13;
+    --bg2: #0d1320;
+    --ink: #eef4ff;
+    --muted: #9fb2cc;
+    --cyan: #79d7ff;
+    --green: #61e3a5;
+    --amber: #f4c55d;
+    --line: rgba(155, 180, 214, 0.18);
   }
-  h1 { color: #79c0ff; font-size: 2rem; margin-bottom: 0.3em; }
-  h2 { color: #56d364; font-size: 1.5rem; border-bottom: 1px solid #30363d; padding-bottom: 0.2em; margin-bottom: 0.5em; }
-  h3 { color: #ffa657; font-size: 1.1rem; margin-bottom: 0.2em; }
-  strong { color: #ffa657; }
-  em { color: #a5d6ff; }
-  a { color: #d2a8ff; }
-  code { background: #161b22; color: #79c0ff; padding: 2px 6px; border-radius: 4px; font-size: 0.95em; }
-  pre { background: #161b22; padding: 0.8em 1em; border-radius: 6px; border: 1px solid #30363d; font-size: 0.88rem; }
-  blockquote { border-left: 3px solid #56d364; padding-left: 0.8em; color: #8b949e; margin-top: 0.8em; }
-  ul { line-height: 1.9; margin-top: 0.3em; }
-  li { margin-bottom: 0.1em; }
-  table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
-  th { background: #161b22 !important; color: #56d364 !important; padding: 6px 12px; border: 1px solid #30363d; text-align: left; }
-  td { background: #0d1117 !important; color: #c9d1d9 !important; padding: 5px 12px; border: 1px solid #21262d; }
-  tr:nth-child(even) td { background: #111820 !important; }
-  section.title { display: flex; flex-direction: column; justify-content: center; text-align: left; }
-  section.title h1 { font-size: 2.6rem; color: #79c0ff; }
-  section.title p { color: #8b949e; }
+  section {
+    font-family: 'IBM Plex Sans', 'Avenir Next', 'Segoe UI', sans-serif;
+    background:
+      radial-gradient(circle at 82% 12%, rgba(121, 215, 255, 0.14), transparent 24%),
+      radial-gradient(circle at 14% 88%, rgba(97, 227, 165, 0.12), transparent 22%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+    color: var(--ink);
+    padding: 58px 72px;
+  }
+  section.cover {
+    justify-content: center;
+  }
+  h1 {
+    color: var(--ink);
+    font-size: 2.78rem;
+    line-height: 1.03;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+  h2 {
+    color: var(--cyan);
+    font-size: 1.52rem;
+    margin: 0 0 0.45em;
+    letter-spacing: -0.02em;
+  }
+  h3 {
+    color: var(--amber);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.35em;
+  }
+  p, li {
+    color: #dbe6f7;
+    font-size: 1.02rem;
+    line-height: 1.48;
+  }
+  ul, ol { margin: 0.35em 0 0.2em 1.1em; padding: 0; }
+  li { margin: 0.12em 0; }
+  strong { color: #ffffff; }
+  a { color: var(--cyan); }
+  code {
+    background: rgba(121, 215, 255, 0.09);
+    color: #effbff;
+    padding: 0.08em 0.35em;
+    border-radius: 5px;
+    font-size: 0.92em;
+  }
+  pre {
+    background: rgba(8, 14, 24, 0.76);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 0.8em 0.95em;
+    margin: 0.45em 0;
+  }
+  pre code {
+    background: none;
+    color: #eaf2ff;
+    font-size: 0.9rem;
+    line-height: 1.42;
+  }
+  blockquote {
+    border-left: 4px solid var(--green);
+    margin: 0.5em 0;
+    padding: 0.55em 0.85em;
+    background: rgba(97, 227, 165, 0.08);
+    color: #edf6ff;
+    border-radius: 0 10px 10px 0;
+  }
+  blockquote p { margin: 0; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.35em 0 0.1em;
+    font-size: 0.9rem;
+  }
+  th {
+    background: rgba(121, 215, 255, 0.12);
+    color: var(--cyan);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  td {
+    background: rgba(8, 14, 24, 0.48);
+    color: #e2ebf8;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: rgba(12, 20, 34, 0.76); }
+  .eyebrow {
+    color: var(--muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.74rem;
+    margin-bottom: 0.7rem;
+  }
+  .deckline {
+    color: var(--cyan);
+    font-size: 1.12rem;
+    margin-top: 0.35rem;
+    max-width: 20em;
+  }
+  .note {
+    color: var(--muted);
+    font-size: 0.94rem;
+    margin-top: 0.85rem;
+    max-width: 30em;
+  }
+  .columns-3, .columns-2 {
+    display: grid;
+    gap: 20px;
+    margin-top: 0.5rem;
+  }
+  .columns-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .columns-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .feature {
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+  .big {
+    font-size: 1.33rem;
+    line-height: 1.08;
+    color: #ffffff;
+    margin: 0 0 0.4em;
+    letter-spacing: -0.03em;
+  }
+  .pipeline {
+    margin-top: 0.25rem;
+    color: #edf5ff;
+    font-size: 1.12rem;
+    line-height: 1.6;
+    font-family: 'IBM Plex Mono', 'SFMono-Regular', Menlo, monospace;
+  }
+  .mini {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 0.65rem;
+  }
+  .footerline {
+    margin-top: 0.9rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
 ---
 
-<!-- _class: title -->
+<!-- _class: cover -->
+
+<div class="eyebrow">State of AI / April 2026</div>
 
 # The State of AI
-## April 2026 — Technical Overview
+## Technical overview
 
-Architecture, models, agents, MCP, and coding systems
-
----
-
-## Timeline — From Transformer to Agents
-
-| Year | Event |
-|------|-------|
-| 2017 | "Attention Is All You Need" — Transformer born |
-| 2020 | GPT-3: 175B params, emergent few-shot learning |
-| 2022 | RLHF fine-tuning → ChatGPT; instruction following at scale |
-| 2023 | GPT-4 multimodal; Claude, Gemini enter; open-source Llama 1/2 |
-| 2024 | Chain-of-thought reasoning (o1); Llama 3; function calling matures |
-| 2025 | Coding agents ship (Claude Code, Devin); MCP standardised |
-| 2026 | Multi-agent orchestration; autonomous local agents (OpenClaw) |
+<div class="deckline">Architecture, models, retrieval, agents, MCP, and coding systems.</div>
+<div class="note">This version keeps the details that matter to builders: what changed, how the stack fits together, and where the bottlenecks sit.</div>
 
 ---
 
-## Types of AI Systems
+## Timeline: from transformers to agent systems
 
-- **Narrow AI** — single-task discriminative models (classifiers, detectors)
-- **Generative AI** — autoregressive LLMs, diffusion models, audio/video
-- **Multimodal** — unified embedding space across text, image, audio, video
-- **Reasoning** — extended chain-of-thought at inference time (o3, R1)
-- **Agentic** — tool-using, multi-step planning, self-correcting loops
-- **Embodied** — physical robots; Vision-Language-Action models (RT-2, π0)
-
----
-
-## How LLMs Work — In Brief
-
-- Transformer trained on next-token prediction over trillions of tokens
-- Instruction-tuned via **RLHF** or **DPO** for helpful responses
-- Key hyperparameters: **context window**, **parameter count**, **temperature**
-- Emergent capabilities appear at scale — not explicitly trained
-
-**Evaluation axes:**
-- Reasoning: MATH, GPQA, ARC-AGI
-- Coding: HumanEval, SWE-bench
-- Knowledge: MMLU, HELM
+<table>
+  <thead>
+    <tr><th style="width: 14%">Year</th><th>Milestone</th><th>Technical implication</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>2017</strong></td><td>Transformer architecture</td><td>Attention becomes the backbone for foundation models.</td></tr>
+    <tr><td><strong>2020</strong></td><td>GPT-3 scale-up</td><td>Few-shot behavior becomes visible at large scale.</td></tr>
+    <tr><td><strong>2022</strong></td><td>ChatGPT and RLHF</td><td>Instruction following becomes a product surface.</td></tr>
+    <tr><td><strong>2023</strong></td><td>Multimodal models mature</td><td>Text, image, and code move into one workflow.</td></tr>
+    <tr><td><strong>2024</strong></td><td>Reasoning models mature</td><td>Test-time compute and deliberation become product features.</td></tr>
+    <tr><td><strong>2025</strong></td><td>Coding agents ship</td><td>Models start reading repos, editing files, and running tools.</td></tr>
+    <tr><td><strong>2026</strong></td><td>Agentic stacks standardize</td><td>Context, protocol, memory, and permissions become the real system.</td></tr>
+  </tbody>
+</table>
 
 ---
 
-## RAG — Retrieval-Augmented Generation
+## Types of AI systems
 
-Solves LLM limitations: stale training data, hallucination on private knowledge, context limits.
-
-**Pipeline:**
-```
-Query → Embed → Vector Search → Top-K Chunks → Prompt + Context → LLM → Answer
-```
-
-**Key components:**
-- **Chunking** — split docs into retrievable units (size matters)
-- **Embeddings** — semantic vector representation (OpenAI, Cohere, `nomic-embed`)
-- **Vector DB** — Pinecone, Weaviate, pgvector, Chroma, Qdrant
-- **Reranking** — re-score retrieved chunks for relevance (Cohere Rerank, cross-encoders)
-
-**Advanced patterns:** HyDE, multi-hop RAG, agentic RAG (agent decides *when* to retrieve)
-
----
-
-## Models & Vendors — 2026
-
-| Vendor | Model | Context | Notes |
-|--------|-------|---------|-------|
-| Anthropic | Claude 4 Opus/Sonnet/Haiku | 200K | Strong reasoning & coding |
-| OpenAI | GPT-4o, o3/o4, GPT-5 | 128K–1M | Multimodal, widest ecosystem |
-| Google | Gemini 2.5 / 3 Pro | 1M | Grounding + Search integration |
-| Meta | Llama 4 Scout | **10M** | Open weights, commercial OK |
-| DeepSeek | R1 / V3 | 128K | Open-weight, strong at math/code |
-| Mistral | Large 2 | 128K | European, open, efficient MoE |
-
-> 500+ models in total. Open-source now rivals closed on most benchmarks.
+<div class="columns-3">
+  <div class="feature">
+    <h3>Narrow</h3>
+    <p>Single-task systems such as classifiers, detectors, and recommenders.</p>
+  </div>
+  <div class="feature">
+    <h3>Generative</h3>
+    <p>Models that produce text, image, audio, video, and code.</p>
+  </div>
+  <div class="feature">
+    <h3>Multimodal</h3>
+    <p>Systems that ingest and generate across text, image, audio, and video.</p>
+  </div>
+  <div class="feature">
+    <h3>Reasoning</h3>
+    <p>Inference-time deliberation that improves harder tasks.</p>
+  </div>
+  <div class="feature">
+    <h3>Agentic</h3>
+    <p>Multi-step systems that plan, act, observe, and revise.</p>
+  </div>
+  <div class="feature">
+    <h3>Embodied</h3>
+    <p>Models controlling physical systems, robots, or devices.</p>
+  </div>
+</div>
 
 ---
 
-## AI Agent Architecture
+## How LLMs work in practice
 
-```
-┌─────────────────────────────────────────────┐
-│                   Agent Loop                │
-│                                             │
-│  Goal → Planner → Action → Observation      │
-│             ↑__________________________|    │
-└─────────────────────────────────────────────┘
-         ↓              ↓             ↓
-      Memory          Tools        Skills
-   (ctx + vector)  (APIs, shell)  (packaged behaviours)
-```
+- Base training is next-token prediction over large corpora.
+- Instruction tuning and alignment make the model usable in product settings.
+- Test-time compute changes the quality of the answer, not just the model weights.
 
-- **Memory**: in-context + RAG vector store + episodic files
-- **Tools**: function-calling, code interpreter, browser, shell
-- **Planning**: ReAct, Tree-of-Thoughts, LLM-as-orchestrator
+<div class="columns-2">
+  <div class="feature">
+    <h3>Core metrics</h3>
+    <p>Context window, latency, throughput, cost, and output length.</p>
+  </div>
+  <div class="feature">
+    <h3>Evaluation axes</h3>
+    <p>Reasoning, coding, knowledge, tool use, and visual understanding.</p>
+  </div>
+</div>
 
----
-
-## Model Context Protocol (MCP)
-
-Open standard — the **"USB-C for AI tools"**
-Donated to Linux Foundation / AAIF — Dec 2025
-
-**Architecture:**
-- **Tools** — callable functions with JSON schemas
-- **Resources** — readable data (files, DB tables, API endpoints)
-- **Prompts** — reusable instruction templates
-- Transport: `stdio` (local) or `HTTP/SSE` (remote)
-
-**Ecosystem:** 200+ servers — GitHub, Slack, Postgres, Stripe, Docker, Figma, Kubernetes…
+<blockquote>
+  The hard question is no longer whether a model can answer. It is whether the system can reliably finish the job.
+</blockquote>
 
 ---
 
-## Skills — Packaged Agent Behaviours
+## Retrieval augmented generation
 
-Skills are pre-built, reusable agent workflows invoked by slash command.
+<div class="pipeline">Question -> Embed -> Search -> Top chunks -> Prompt + context -> Answer</div>
 
-```
-/review           → code review pipeline
-/gsd-plan-phase   → multi-step planning agent
-/debug            → scientific debugging loop
-/security-review  → threat model analysis
-```
-
-- Defined as markdown instruction files (`skill.md`)
-- Composable — skills can invoke other skills
-- OpenClaw popularised community skill sharing at scale
-
----
-
-## Coding Agents — Landscape
-
-| Agent | Model | Approach |
-|-------|-------|----------|
-| **Claude Code** | Claude 4 | CLI + IDE; full repo; multi-agent; hooks; MCP |
-| **Copilot Workspace** | GPT-4o | PR-centric; diff-based plan → edit → CI |
-| **Cursor** | Claude/GPT | Editor-native; inline + composer modes |
-| **Devin** | Proprietary | Sandboxed VM; long-horizon autonomous tasks |
-| **OpenHands** | Any | Open-source; Docker-sandboxed; tool-use heavy |
-
-> Research: ~1.6% of system is AI logic; ~98.4% is operational infrastructure
+<div class="columns-2">
+  <div class="feature">
+    <h3>What it solves</h3>
+    <p>Stale training data, private knowledge, and context limits.</p>
+  </div>
+  <div class="feature">
+    <h3>What it adds</h3>
+    <p>Fresh grounding from documents, databases, and knowledge bases.</p>
+  </div>
+  <div class="feature">
+    <h3>What matters</h3>
+    <p>Chunking, embeddings, retrieval quality, and reranking.</p>
+  </div>
+  <div class="feature">
+    <h3>Operational point</h3>
+    <p>RAG is usually a system design problem before it is a model problem.</p>
+  </div>
+</div>
 
 ---
 
-## Claude Code — Architecture
+## Model landscape
 
-**Execution model:**
-- Maps full repo via agentic search (no manual context selection)
-- Plans → edits files → runs shell/tests → iterates on failure → commits
+<table>
+  <thead>
+    <tr><th>Vendor</th><th>Current family</th><th>Technical edge</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>OpenAI</strong></td><td>GPT-5.5 / GPT-5.4 / GPT-5</td><td>Coding, tool use, and long-horizon work.</td></tr>
+    <tr><td><strong>Anthropic</strong></td><td>Claude Opus 4.6 / Sonnet 4.6</td><td>Strong reasoning and code execution, 1M-token context beta.</td></tr>
+    <tr><td><strong>Google DeepMind</strong></td><td>Gemini 2.5 Pro</td><td>1M-token context and strong multimodal reasoning.</td></tr>
+    <tr><td><strong>Meta</strong></td><td>Llama 4 Scout / Maverick</td><td>Open weights, multimodality, and very long context.</td></tr>
+  </tbody>
+</table>
 
-**Extension points:**
-- `MCP servers` — plug in any external tool
-- `Hooks` — shell commands on pre/post tool events
-- `Agent SDK` — build custom agents on Claude Code's tool layer
-- `CLAUDE.md` — project-level persistent instructions
-
-**Multi-agent:** lead agent spawns sub-agents for parallel workstreams
-
----
-
-## OpenClaw — Autonomous Local Agent
-
-**What it is:** self-hosted, model-agnostic autonomous agent
-**Interface:** consumer messaging (Signal, Telegram, Discord, WhatsApp)
-**Model support:** Claude, GPT-4o, DeepSeek, Llama (any OpenAI-compatible endpoint)
-
-**Key design decisions:**
-- Runs locally — data never leaves your machine
-- `skill.md` files = community-extensible capability system
-- Event-driven loop: message → plan → act → respond
-
-**Timeline:** Nov 2025 (Clawdbot) → Jan 2026 (OpenClaw) → fastest-growing GitHub repo ever
+<div class="mini">The winning stack is model plus orchestration, not model alone.</div>
 
 ---
 
-## Trends & Open Problems
+## Agent architecture
 
-**Capability frontier:**
-- Long-horizon task completion (hours, not minutes)
-- Multi-agent coordination and trust between agents
-- Persistent memory and personalisation over time
+<div class="pipeline">Goal -> Planner -> Action -> Observation -> Memory -> Next action</div>
 
-**Infrastructure:**
-- MCP as universal tool layer — replacing bespoke integrations
-- Speculative execution, prompt caching, distillation for cost
+<div class="columns-3">
+  <div class="feature">
+    <h3>Memory</h3>
+    <p>Context window, vector store, files, and state.</p>
+  </div>
+  <div class="feature">
+    <h3>Tools</h3>
+    <p>Search, shell, APIs, file systems, and browsers.</p>
+  </div>
+  <div class="feature">
+    <h3>Planning</h3>
+    <p>Task decomposition, self-correction, and retry logic.</p>
+  </div>
+</div>
 
-**Open problems:**
-- Hallucination under distribution shift
-- Reliable agent termination and sandboxing
-- Eval frameworks that track real-world task success
-
----
-
-## Key Takeaways
-
-1. **Transformer → Agent** is the defining architectural shift of this decade
-2. Open-source models (Llama 4, DeepSeek) now competitive with frontier closed models
-3. **MCP** is becoming the standard interface for AI ↔ external systems
-4. Coding agents are production-grade — not just autocomplete
-5. **OpenClaw** proves locally-owned autonomous agents are viable at consumer scale
-6. The bottleneck is now **orchestration and evals**, not raw model capability
+<blockquote>
+  Agents are software systems wrapped around a model, not the model itself.
+</blockquote>
 
 ---
 
-<!-- _class: title -->
+## MCP
 
-# Thank You
+MCP standardizes how an application exposes context to a model.
 
-**Docs & References**
-- [code.claude.com/docs](https://code.claude.com/docs) — Claude Code
-- [modelcontextprotocol.io](https://modelcontextprotocol.io) — MCP spec
-- [openclaw.ai](https://openclaw.ai) — OpenClaw
-- [arxiv.org/abs/2604.14228](https://arxiv.org/abs/2604.14228) — *Dive into Claude Code*
-- [llm-stats.com](https://llm-stats.com/ai-trends) — model benchmarks
+<div class="columns-3">
+  <div class="feature">
+    <h3>Tools</h3>
+    <p>Callable actions with schemas.</p>
+  </div>
+  <div class="feature">
+    <h3>Resources</h3>
+    <p>Readable data from files, databases, or services.</p>
+  </div>
+  <div class="feature">
+    <h3>Prompts</h3>
+    <p>Reusable instruction templates and workflows.</p>
+  </div>
+</div>
 
-*April 28, 2026*
+- Client-server architecture keeps integrations portable.
+- The spec supports local and remote transports.
+- The Linux Foundation moved MCP into the Agentic AI Foundation in December 2025.
+
+---
+
+## Skills and coding agents
+
+<table>
+  <thead>
+    <tr><th>System</th><th>What it packages</th><th>Why it matters</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Skills</strong></td><td>Reusable behavior</td><td>Workflow logic becomes a file, not a prompt fragment.</td></tr>
+    <tr><td><strong>Claude Code</strong></td><td>Repo-scale coding agent</td><td>Reads code, edits files, runs tests, and commits changes.</td></tr>
+    <tr><td><strong>Copilot Workspace</strong></td><td>Planning plus implementation</td><td>Moves from issue to patch through a guided workflow.</td></tr>
+    <tr><td><strong>Cursor / Devin / OpenHands</strong></td><td>Different autonomy models</td><td>Show the spectrum from editor assist to delegated execution.</td></tr>
+  </tbody>
+</table>
+
+---
+
+## OpenClaw
+
+<div class="columns-2">
+  <div class="feature">
+    <h3>Architecture</h3>
+    <p>A self-hosted assistant with message-channel surfaces, a Gateway control plane, and model routing.</p>
+  </div>
+  <div class="feature">
+    <h3>Skills</h3>
+    <p>Packaged as directories containing `SKILL.md` instruction files.</p>
+  </div>
+  <div class="feature">
+    <h3>Operational value</h3>
+    <p>Local ownership, controlled routing, and reusable task behavior.</p>
+  </div>
+  <div class="feature">
+    <h3>System lesson</h3>
+    <p>The model is one component in a larger control plane.</p>
+  </div>
+</div>
+
+<blockquote>
+  OpenClaw is a useful example because it makes the control layer explicit.
+</blockquote>
+
+---
+
+## Trends and open problems
+
+<div class="columns-3">
+  <div class="feature">
+    <h3>Capability</h3>
+    <p>Long-horizon task completion is still brittle.</p>
+  </div>
+  <div class="feature">
+    <h3>Infrastructure</h3>
+    <p>Permissioning, sandboxing, and auditability are becoming core product work.</p>
+  </div>
+  <div class="feature">
+    <h3>Evaluation</h3>
+    <p>Benchmarks matter less than task success in real workflows.</p>
+  </div>
+</div>
+
+<div class="footerline">The bottleneck is shifting from model capability to orchestration quality.</div>
+
+---
+
+## Takeaways
+
+<div class="columns-2">
+  <div class="feature">
+    <h3>1</h3>
+    <p>Transformer architecture changed the model layer.</p>
+  </div>
+  <div class="feature">
+    <h3>2</h3>
+    <p>RAG, tools, and MCP changed the context layer.</p>
+  </div>
+  <div class="feature">
+    <h3>3</h3>
+    <p>Agents and skills changed the execution layer.</p>
+  </div>
+  <div class="feature">
+    <h3>4</h3>
+    <p>The next advantage is orchestration, not just raw model size.</p>
+  </div>
+</div>
+
+---
+
+<!-- _class: cover -->
+
+<div class="eyebrow">State of AI / April 2026</div>
+<h1>Thank you</h1>
+<div class="note">See <code>ai-state-research.md</code> for source links and claim notes.</div>
